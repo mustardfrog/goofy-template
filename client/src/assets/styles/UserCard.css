@@ -1,0 +1,16 @@
+.user {
+  /* background-color: red; */
+}
+#user {
+  background-color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.user-card {
+  display: flex;
+  padding: 30 30;
+  margin: 50px 40px;
+  /* justify-content: center; */
+  /* text-align: center; */
+}

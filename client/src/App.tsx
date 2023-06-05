@@ -1,36 +1,23 @@
-import { useState } from 'react'
-// import './App.css'
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 
-function App() {
-  const [formData, setFormData] = useState({ name: '', email: '' })
+import CreateUsers from "./components/CreateUsers";
+import ShowUsers from "./components/ShowUsers";
+import UpdateUsers from "./components/UpdateUsers";
+import UserDetails from "./components/UserDetails";
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`Name: ${formData.name}, Email: ${formData.email}`
-    );
-  }
-
+const App = () => {
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-
-        <label htmlFor="message">Message:</label>
-        <textarea id="message" name="message" value={formData.message} onChange={handleChange} />
-
-        <button type="submit">Submit</button>
-      </form>
-    </>
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<ShowUsers />} />
+          <Route path="/update-user" element={<UpdateUsers />} />
+          <Route path="/create-user" element={<CreateUsers />} />
+          <Route path="/user-detail" element={<UserDetails />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
-export default App
+export default App;

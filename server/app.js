@@ -1,23 +1,21 @@
 const express = require('express');
+const { dotenv } = require('dotenv').config();
 const app = express();
 
+const cors = require('cors');
+
 const db = require('./db/db');
+const router = require('./routes/api/submit');
 
-const User = require('./db/models/User');
+const port = process.env.PORT || 9001;
 
-const port = process.env.PORT || 9000;
-
-
-app.use(express.json());
+app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 
-const firstUser = new User({
-  username: 'chaeng',
-  age: 20
-})
-firstUser.save();
+app.use('/api/submit', router);
+app.use(router);
+app.use(cors({ origin: true, credentials: true }));
 
 app.listen(port, () => {
   console.log(`listening on port: ${port}`);
-}
-)
+})
